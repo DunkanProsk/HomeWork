@@ -1,3 +1,4 @@
+alert('Приветствие');
 var today = new Date();
 var year = today.getUTCFullYear();
 var yourName = prompt('Как вас зовут?');
