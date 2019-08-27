@@ -1,12 +1,3 @@
-var globalDate = new Date();
-
-var dateNow = globalDate.getDate(); 
-var monthNow = globalDate.getMonth();
-var yearNow = globalDate.getFullYear();
-var dayNow = globalDate.getDay();
-var hoursNow = globalDate.getHours();
-var minutesNow = globalDate.getMinutes();
-var secondsNow = globalDate.getSeconds();
 
 // повторить с интервалом 2 секунды
 var timerId = setInterval(() => outputConsole(), 1000);
@@ -16,13 +7,21 @@ setTimeout(() => { clearInterval(timerId); alert('stop'); }, 5000);
 
 
 function outputConsole() {
-	console.log(checkDeclensionMonth(monthNow) + (' ' + yearNow + ' года,') + checkDeclensionDay(dayNow));
-	console.log(checkDeclensionHours(hoursNow) + ' ' + checkDeclensionMinutes(minutesNow) + ' ' + checkDeclensionSeconds(secondsNow));
+	console.log(checkDeclensionMonth() + (' ' + checkDeclensionYear() + ' года,') + checkDeclensionDay());
+	console.log(checkDeclensionHours() + ' ' + checkDeclensionMinutes() + ' ' + checkDeclensionSeconds());
 }
 
+function checkDeclensionYear() {
+    let globalDate = new Date();
+    let yearNow = globalDate.getFullYear();
+    return yearNow;
 
-function checkDeclensionDay(day) {
-	var arrDay = [  ' Воскресенье',
+}
+
+function checkDeclensionDay() {
+    let globalDate = new Date();
+    let day = globalDate.getDay();
+	let arrDay = [  ' Воскресенье',
 	 				' Понедельник',
 	  				' Вторник',
 	   				' Среда',
@@ -32,8 +31,11 @@ function checkDeclensionDay(day) {
 	return arrDay[day];
 }
 
-function checkDeclensionMonth(month) {
-	var arrMonth = [' Января',
+function checkDeclensionMonth() {
+    let globalDate = new Date();
+    let month = globalDate.getMonth();
+    let date = globalDate.getHours();
+	let arrMonth = [' Января',
 	 				' Февраля',
 	  				' Марта',
 	   				' Апреля',
@@ -45,10 +47,12 @@ function checkDeclensionMonth(month) {
 	         		' Октября',
 	          		' Ноября',
 	           		' Девабря'];
-	return 'Сегодня ' + dateNow + arrMonth[month];
+	return 'Сегодня ' + date + arrMonth[month];
 }
 
-function checkDeclensionHours(hours) {
+function checkDeclensionHours() {
+    let globalDate = new Date();
+    let hours = globalDate.getHours();
 	if((hours > 4) && (hours < 21)) {
 		return hours + ' часов';
 	} else if((hours == 1) || (hours == 21)) {
@@ -58,7 +62,9 @@ function checkDeclensionHours(hours) {
 	}	
 }
 
-function checkDeclensionMinutes(minutes) {
+function checkDeclensionMinutes() {
+    let globalDate = new Date();
+    let minutes = globalDate.getMinutes();
 	if( (minutes == 1) ||
 	   (minutes == 21) ||
 	   (minutes == 31) ||
@@ -86,7 +92,9 @@ function checkDeclensionMinutes(minutes) {
 	}
 }
 
-function checkDeclensionSeconds(seconds) {
+function checkDeclensionSeconds() {
+    let globalDate = new Date();
+    let seconds = globalDate.getSeconds();
 	if( (seconds == 1) ||
 	   (seconds == 21) ||
 	   (seconds == 31) ||
