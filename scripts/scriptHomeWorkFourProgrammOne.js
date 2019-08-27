@@ -1,10 +1,5 @@
-
-// повторить с интервалом 2 секунды
 var timerId = setInterval(() => outputConsole(), 1000);
-
-// остановить вывод через 5 секунд
-setTimeout(() => { clearInterval(timerId); alert('stop'); }, 5000);
-
+setTimeout(() => { clearInterval(timerId); console.log('STOP'); }, 5000);
 
 function outputConsole() {
 	console.log(checkDeclensionMonth() + (' ' + checkDeclensionYear() + ' года,') + checkDeclensionDay());
