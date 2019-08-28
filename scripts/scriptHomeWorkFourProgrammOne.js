@@ -2,20 +2,26 @@ var timerId = setInterval(() => outputConsole(), 1000);
 setTimeout(() => { clearInterval(timerId); console.log('STOP'); }, 5000);
 
 function outputConsole() {
-	console.log(checkDeclensionMonth() + (' ' + checkDeclensionYear() + ' года,') + checkDeclensionDay());
-	console.log(checkDeclensionHours() + ' ' + checkDeclensionMinutes() + ' ' + checkDeclensionSeconds());
+	console.log(checkMonth() + (' ' + getDate(1) + ' года,') + checkDay());
+	console.log(getDate(3) + checkTime(getDate(3), [' час', ' часа', ' часов']) + ' ' +
+                getDate(4) + checkTime(getDate(4), [' минута', ' минуты', ' минут']) + ' ' +
+                getDate(5) + checkTime(getDate(5), [' секунда', ' секунды', ' секунд']));
 }
 
-function checkDeclensionYear() {
-    let globalDate = new Date();
-    let yearNow = globalDate.getFullYear();
-    return yearNow;
+function getDate(x){
+    let globalDate = new Date(); 
+    let arrDay =  [ globalDate.getMonth(),
+                    globalDate.getFullYear(),
+                    globalDate.getDate(),
+                    globalDate.getHours(),
+                    globalDate.getMinutes(),
+                    globalDate.getSeconds(),
+                    globalDate.getDay() ];
 
+    return arrDay[x];            
 }
 
-function checkDeclensionDay() {
-    let globalDate = new Date();
-    let day = globalDate.getDay();
+function checkDay() {
 	let arrDay = [  ' Воскресенье',
 	 				' Понедельник',
 	  				' Вторник',
@@ -23,13 +29,10 @@ function checkDeclensionDay() {
 	    			' Четверг',
 	     			' Пятница',
 	     			' Суббота' ];
-	return arrDay[day];
+	return arrDay[getDate(6)];
 }
 
-function checkDeclensionMonth() {
-    let globalDate = new Date();
-    let month = globalDate.getMonth();
-    let date = globalDate.getHours();
+function checkMonth() {
 	let arrMonth = [' Января',
 	 				' Февраля',
 	  				' Марта',
@@ -42,77 +45,10 @@ function checkDeclensionMonth() {
 	         		' Октября',
 	          		' Ноября',
 	           		' Девабря'];
-	return 'Сегодня ' + date + arrMonth[month];
+	return 'Сегодня ' + getDate(2) + arrMonth[getDate(0)];
 }
 
-function checkDeclensionHours() {
+function checkTime(n, titles) {
     let globalDate = new Date();
-    let hours = globalDate.getHours();
-	if((hours > 4) && (hours < 21)) {
-		return hours + ' часов';
-	} else if((hours == 1) || (hours == 21)) {
-		return hours + ' час';
-	} else {
-		return hours + ' часа';
-	}	
-}
-
-function checkDeclensionMinutes() {
-    let globalDate = new Date();
-    let minutes = globalDate.getMinutes();
-	if( (minutes == 1) ||
-	   (minutes == 21) ||
-	   (minutes == 31) ||
-	   (minutes == 41) ||
-	   (minutes == 51) ) {
-		return minutes + ' минута';
-	} else if( (minutes == 2) ||
-			   (minutes == 3) ||
-			   (minutes == 4) ||
-			  (minutes == 22) ||
-			  (minutes == 23) ||
-			  (minutes == 24) ||
-			  (minutes == 32) ||
-			  (minutes == 33) ||
-			  (minutes == 34) ||
-			  (minutes == 42) ||
-			  (minutes == 43) ||
-			  (minutes == 44) ||
-			  (minutes == 52) ||
-			  (minutes == 53) ||
-			  (minutes == 54)) {
-		return minutes + ' минуты';
-	} else {
-		return minutes + ' минут';
-	}
-}
-
-function checkDeclensionSeconds() {
-    let globalDate = new Date();
-    let seconds = globalDate.getSeconds();
-	if( (seconds == 1) ||
-	   (seconds == 21) ||
-	   (seconds == 31) ||
-	   (seconds == 41) ||
-	   (seconds == 51) ) {
-		return seconds + ' секунда';
-	} else if( (seconds == 2) ||
-			   (seconds == 3) ||
-			   (seconds == 4) ||
-			  (seconds == 22) ||
-			  (seconds == 23) ||
-			  (seconds == 24) ||
-			  (seconds == 32) ||
-			  (seconds == 33) ||
-			  (seconds == 34) ||
-			  (seconds == 42) ||
-			  (seconds == 43) ||
-			  (seconds == 44) ||
-			  (seconds == 52) ||
-			  (seconds == 53) ||
-			  (seconds == 54)) {
-		return seconds + ' секунды';
-	} else {
-		return seconds + ' секунд';
-	}
+    return titles[(n % 10 === 1 && n % 100 !== 11) ? 0 : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2]
 }
