@@ -8,6 +8,15 @@ function outputConsole() {
                 getDate(5) + checkTime(getDate(5), [' секунда', ' секунды', ' секунд']));
 }
 
+function outputDisplay(){ 
+    document.getElementById('txt').innerHTML = checkMonth() + (' ' + getDate(1) + ' года,') + checkDay() + '\n' +
+                getDate(3) + checkTime(getDate(3), [' час', ' часа', ' часов']) + ' ' +
+                getDate(4) + checkTime(getDate(4), [' минута', ' минуты', ' минут']) + ' ' +
+                getDate(5) + checkTime(getDate(5), [' секунда', ' секунды', ' секунд']);
+    setTimeout('outputDisplay()',500);
+
+}
+
 function getDate(x){
     let globalDate = new Date(); 
     let arrDay =  [ globalDate.getMonth(),
