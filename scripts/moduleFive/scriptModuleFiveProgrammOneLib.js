@@ -7,7 +7,7 @@ function start() {
 	if(n <= 8) {
 		if(x !== 1) {
 			i = prompt('Число');
-			num(i, randomazer);
+			num(i, randomazer());
 		} else {
 			break;
 		}
@@ -15,7 +15,7 @@ function start() {
 		if(x !== 1) {
 			alert('Последняя попытка');
 			i = prompt('Число');
-			numEnd(i, randomazer);
+			numEnd(i, randomazer());
 		} else {
 			break;
 		}
