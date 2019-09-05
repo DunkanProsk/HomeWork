@@ -1,34 +1,44 @@
+(function() {
+ 
+    var n = 0;
+    var x = 0;
+    var j = getRandomInt(0, 1000);
+    
+    window.start = function() {
+    	let i = 0;
+        if(n == 10) {
+            return;
+        }
+        n++;
+        
+		if(n <= 9) {
+			if(x !== 1) {
+				i = prompt('Число');
+				num(i, j);
+				start();
+			} else {
+				questEnd();
+			}
+		} else if(x !== 1) {
+				alert('Последняя попытка');
+				i = prompt('Число');
+				numEnd(i, j);
+				start();
+			} else {
+				questEnd();
+			}		
+	}	
 
-function start() {
-	var x = 0;
-	var randomazer = genRandomNumber();
-
-	for(var n = 0; n < 10; n++) {
-	if(n <= 8) {
-		if(x !== 1) {
-			i = prompt('Число');
-			num(i, randomazer());
-		} else {
-			break;
-		}
-	} else {
-		if(x !== 1) {
-			alert('Последняя попытка');
-			i = prompt('Число');
-			numEnd(i, randomazer());
-		} else {
-			break;
-		}
+    function getRandomInt(min, max) {
+	  return Math.floor(Math.random() * (max - min)) + min;
 	}
-	}
 
-	questEnd();
-
-	function genRandomNumber() {
-		let random = 0;
+	function cheakAttempt() {
+	  	let attemp = 0;
 		return function() {
-			return random = Math.floor(Math.random() * (1000 - 0)) + 0;
-		}
+		    ++attemp;
+		    return attemp;
+		};
 	}
 
 	function num(i, j) {
@@ -78,9 +88,14 @@ function start() {
 	function questEnd() {
 		let quest = confirm('Хотите начать заново?');
 		if(quest === true) {
-			getNum();
+			i = 0;
+			x = 0;
+			n = 0;
+			j = getRandomInt(0, 1000);
+			start();
 		} else {
 			alert('Хорошего дня!');
 		}
 	}
-}
+
+})();
