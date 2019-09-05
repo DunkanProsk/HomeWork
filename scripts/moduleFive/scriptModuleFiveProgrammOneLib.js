@@ -1,8 +1,7 @@
 (function() {
- 
-    var n = 0;
-    var x = 0;
-    var j = getRandomInt(0, 1000);
+    let n = 0;
+    let x = 0;
+    let j = getRandomInt(0, 1000);
     
     window.start = function() {
     	let i = 0;
@@ -56,7 +55,7 @@
 			return x = 2;
 		} else if(i == j) {
 			alert('Молодец!');
-			return x = 1;
+			questEnd();
 		} else {
 			alert('Некорректные данные!');
 			return x = 1;
@@ -66,22 +65,22 @@
 	function numEnd(i, j) {
 		if(i === null) {
 			alert('Отмена!');
-			return x = 1;
+			questEnd();
 		} else if(i == '') {
 			alert('Пустая строка!');
-			return x = 1;
+			questEnd();
 		} else if(i > j) {
 			alert('Неверно!');
-			return x = 2;
+			questEnd();
 		} else if(i < j) {
 			alert('Неверно!');
-			return x = 2;
+			questEnd();
 		} else if(i == j) {
 			alert('Молодец!');
-			return x = 1;
+			questEnd();
 		} else {
 			alert('Некорректные данные!');
-			return x = 1;
+			questEnd();
 		}
 	}
 
