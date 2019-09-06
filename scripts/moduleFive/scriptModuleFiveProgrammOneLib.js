@@ -1,100 +1,57 @@
 (function() {
-    let n = 0;
-    let x = 0;
-    let j = getRandomInt(0, 1000);
-    
-    window.start = function() {
-    	let i = 0;
-        if(n == 10) {
-            return;
-        }
-        n++;
-        
-		if(n <= 9) {
-			if(x !== 1) {
-				i = prompt('Число');
-				num(i, j);
-				start();
-			} else {
-				questEnd();
-			}
-		} else if(x !== 1) {
-				alert('Последняя попытка');
-				i = prompt('Число');
-				numEnd(i, j);
-				start();
-			} else {
-				questEnd();
-			}		
-	}	
-
-    function getRandomInt(min, max) {
+	
+	function getRandomInt(min, max) {
 	  return Math.floor(Math.random() * (max - min)) + min;
 	}
 
-	function cheakAttempt() {
-	  	let attemp = 0;
-		return function() {
-		    ++attemp;
-		    return attemp;
-		};
-	}
+    var randomNum = getRandomInt(0, 1000);
+    var attempts = 10;
+    
+    window.start = function() {
 
-	function num(i, j) {
-		if(i === null) {
-			alert('Отмена!');
-			return x = 1;
-		} else if(i == '') {
-			alert('Пустая строка!');
-			return x = 1;
-		} else if(i > j) {
-			alert('Меньше!');
-			return x = 2;
-		} else if(i < j) {
-			alert('Больше!');
-			return x = 2;
-		} else if(i == j) {
-			alert('Молодец!');
-			questEnd();
-		} else {
-			alert('Некорректные данные!');
-			return x = 1;
+    	function questionRestart() {
+			var que = confirm('Хотите начать заново?');
+			if(que == true) {
+				randomNum = getRandomInt(0, 1000);
+				start();
+			} else {
+				alert('Хорошего дня!');
+			}
 		}
-	}
 
-	function numEnd(i, j) {
-		if(i === null) {
-			alert('Отмена!');
-			questEnd();
-		} else if(i == '') {
-			alert('Пустая строка!');
-			questEnd();
-		} else if(i > j) {
-			alert('Неверно!');
-			questEnd();
-		} else if(i < j) {
-			alert('Неверно!');
-			questEnd();
-		} else if(i == j) {
-			alert('Молодец!');
-			questEnd();
-		} else {
-			alert('Некорректные данные!');
-			questEnd();
-		}
-	}
+    	alert('Угадайте число от 0 до 1000, методом - больше, меньше');
+		let i = 0;
 
-	function questEnd() {
-		let quest = confirm('Хотите начать заново?');
-		if(quest === true) {
-			i = 0;
-			x = 0;
-			n = 0;
-			j = getRandomInt(0, 1000);
-			start();
-		} else {
-			alert('Хорошего дня!');
-		}
-	}
+		do {
+			i++;
+			var inputNum = prompt('Введите число');
 
+			if (inputNum === null) {
+				alert('Отмена!');
+				break;
+			}
+
+      		if (isNaN(parseInt(inputNum))) {
+				alert('Введите число!');
+			} else if (inputNum > randomNum) {
+				alert('Меньше!');
+			} else if (inputNum < randomNum) {
+				alert('Больше!');
+			} else {
+				alert('Правильно!');
+				questionRestart();
+				break;
+			}
+
+			if (i == (attempts - 1)) {
+				alert('Последняя попытка!');
+			}
+
+			if (i == attempts) {
+				alert('Вы исчерпали все попытки!');
+				questionRestart();
+				break;
+			} 
+		} while((inputNum != randomNum) && (i <= attempts));
+	}
 })();
