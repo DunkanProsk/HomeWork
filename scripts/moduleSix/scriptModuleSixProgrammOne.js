@@ -36,9 +36,7 @@ function UserList() {
         }
     } while (fullName !== null);
 
-    for(var obj of this.ArrayUserList) {
-        console.log(obj.fullInfo());
-    }
+    this.getAllUsers();
 }
 
 UserList.prototype.getAllUsers = function() {
@@ -46,3 +44,6 @@ UserList.prototype.getAllUsers = function() {
     for(var obj of this.ArrayUserList) {
         console.log(obj.fullInfo());
     }
+}
+
+new UserList();
