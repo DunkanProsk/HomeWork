@@ -40,7 +40,6 @@ function UserList() {
 }
 
 UserList.prototype.getAllUsers = function() {
-    console.log('asd');
     for(var obj of this.ArrayUserList) {
         console.log(obj.fullInfo());
     }
