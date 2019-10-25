@@ -25,18 +25,6 @@ User.prototype.getDate = function() {
 
 function UserList() {
     this.ArrayUserList = [];
-
-    do {    
-        var fullName = prompt('Введите имя и фамилию пользователя');
-        if (fullName !== null) {
-            var arrFullName = fullName.split(' ');
-            var firstName = arrFullName[0];
-            var lastName = arrFullName[1];
-            this.ArrayUserList.push(new User(firstName, lastName));
-        }
-    } while (fullName !== null);
-
-    this.getAllUsers();
 }
 
 UserList.prototype.getAllUsers = function() {
@@ -45,4 +33,21 @@ UserList.prototype.getAllUsers = function() {
     }
 }
 
-new UserList();
+UserList.prototype.add = function(firstName, lastName) {
+    this.ArrayUserList.push(new User(firstName, lastName));   
+}
+
+
+var userList = new UserList();
+
+do {    
+    var fullName = prompt('Введите имя и фамилию пользователя');
+    if (fullName !== null) {
+        var arrFullName = fullName.split(' ');
+        var firstName = arrFullName[0];
+        var lastName = arrFullName[1];
+        userList.add(firstName, lastName);
+    }
+} while (fullName !== null);
+
+userList.getAllUsers();
