@@ -48,6 +48,17 @@ function Transport() {
 function Car() {
     Transport.apply(this);
 
+    this.trunk = 'close';
+    this.trunkIvent = function() {
+        if(this.trunk == 'close') {
+            this.trunk = 'open';
+            return this.trunk;
+        } else {
+            this.trunk = 'close';
+            return this.trunk;
+        };
+    };
+
     this.wheels = 4;
     this.weight = 1,5;
     this.passengerSeats = 4;
@@ -56,6 +67,21 @@ function Car() {
 
 function Airplane() {
     Transport.apply(this);
+
+    this.chassis = 'open';
+    this.chassisIvent = function() {
+        if(this.speed > 600) {
+            if(this.chassis == 'open') {
+                this.chassis = 'close';
+                return this.chassis;
+            } else {
+                this.chassis = 'open';
+                return this.chassis;
+            };
+        } else {
+            return `Вы не взлетели!`;
+        };
+    };
 
     this.wheels = 6;
     this.weight = 150;
@@ -68,6 +94,17 @@ function Airplane() {
 
 function Ship() {
     Transport.apply(this);
+
+    this.anchor = 'close';
+    this.anchorIvent = function() {
+        if(this.anchor == 'close') {
+            this.anchor = 'open';
+            return this.anchor;
+        } else {
+            this.anchor = 'close';
+            return this.anchor;
+        };
+    };
 
     this.wheels = 0;
     this.weight = 20236;
@@ -97,6 +134,8 @@ console.log(`${car.downTransmission()}`);
 console.log(`${car.downTransmission()}`);
 console.log(car.engineCheck());
 console.log(`${car.downTransmission()}`);
+console.log(`Багажник ${car.trunkIvent()}`);
+console.log(`Багажник ${car.trunkIvent()}`);
 
 console.log(``);
 console.log(``);
@@ -110,8 +149,10 @@ console.log(`${air.upTransmission()}`);
 console.log(`${air.upTransmission()}`);
 console.log(`${air.upTransmission()}`);
 console.log(`${air.upTransmission()}`);
+console.log(`Шасси ${air.chassisIvent()}`);
 console.log(`${air.upTransmission()}`);
 console.log(`${air.downTransmission()}`);
+console.log(`Шасси ${air.chassisIvent()}`);
 console.log(`${air.downTransmission()}`);
 console.log(`${air.downTransmission()}`);
 console.log(`${air.downTransmission()}`);
@@ -119,5 +160,6 @@ console.log(`${air.downTransmission()}`);
 console.log(`${air.downTransmission()}`);
 console.log(air.engineCheck());
 console.log(`${air.downTransmission()}`);
+console.log(`Шасси ${air.chassisIvent()}`);
 
 alert(`смотри консоль`);
